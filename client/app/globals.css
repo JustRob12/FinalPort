@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Use .dark class for dark mode instead of system prefers-color-scheme */
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-brand-black: #000000;
+  --color-brand-white: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* neutral gray border for light mode */
+  border-color: #d1d5db;
+}
+
+.dark *,
+.dark *::before,
+.dark *::after {
+  /* subtle border for dark mode */
+  border-color: #262626;
+}
+
+html {
+  font-family: 'Inter', system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+  overflow-x: hidden;
+}
+
+.dark body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
+/* Standard scrollbar hiding utilities */
+.scrollbar-hide::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.scrollbar-hide,
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}
