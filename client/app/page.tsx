@@ -24,6 +24,8 @@ import {
   Linkedin,
   Share2,
   Heart,
+  Trophy,
+  ChevronDown,
 } from "lucide-react";
 import { ThemeAnimationType, useModeAnimation } from "react-theme-switch-animation";
 
@@ -46,6 +48,16 @@ const experiences = [
   { title: "Layout Artist / Photographer", company: "PESO DavOr", period: "2022 – 2024" },
   { title: "BS Information Technology", company: "Davao Oriental State University", period: "2022 – 2026" },
   { title: "Hello World! 👋", company: "Wrote my first line of code", period: "2021" },
+];
+
+const achievements = [
+  { title: "Champion SIGLAKAS", subtitle: "Short Film", year: "2025" },
+  { title: "Champion SIGLAKAS", subtitle: "Artistic Videography", year: "2024" },
+  { title: "Champion SIGLAKAS", subtitle: "Artistic Videography", year: "2023" },
+  { title: "2nd Placer SINEMATI", subtitle: "Short Film Competition", year: "2023" },
+  { title: "5th Placer RSPC", subtitle: "Radio Broadcasting and Script Writing (Filipino)", year: "2022" },
+  { title: "4th Placer RSPC", subtitle: "Best in Technical", year: "2022" },
+  { title: "1st Placer DSPC", subtitle: "Radio Broadcasting and Script Writing (Filipino)", year: "2021" },
 ];
 
 const certificates = [
@@ -150,6 +162,7 @@ export default function Home() {
 
   const [selectedCert, setSelectedCert] = useState<{ title: string; image: string } | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const galleryCarouselRef = useRef<HTMLDivElement>(null);
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
@@ -202,7 +215,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
               {/* Avatar */}
               <div
-                className="h-32 w-32 shrink-0 overflow-hidden rounded-2xl cursor-pointer"
+                className="h-42 w-42 shrink-0 overflow-hidden rounded-2xl cursor-pointer"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -251,18 +264,50 @@ export default function Home() {
                     <Mail size={12} strokeWidth={2} />
                     Send Email
                   </a>
-                </div>
-                <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-2">
-                  <a
-                    href="https://www.facebook.com/ledehbuuug"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-pink-500 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-pink-600 dark:border-neutral-800 dark:text-black dark:hover:bg-[#FFC0CB]"
-                  >
-                    <Heart size={12} strokeWidth={2} />
-                    Pretty GF
-                    <Heart size={12} strokeWidth={2} />
-                  </a>
+
+                  {/* Achievements Dropdown */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsAchievementsOpen(!isAchievementsOpen)}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-black transition hover:bg-neutral-100 dark:border-neutral-800 dark:bg-[#111111] dark:text-white dark:hover:bg-neutral-800"
+                    >
+                      <Trophy size={12} strokeWidth={2} className="text-yellow-500" />
+                      Achievements
+                      <ChevronDown size={12} strokeWidth={2} className={`transition-transform duration-200 ${isAchievementsOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {isAchievementsOpen && (
+                      <div className="absolute left-0 mt-2 w-64 rounded-xl border border-gray-200 bg-white p-2 shadow-xl dark:border-neutral-800 dark:bg-[#161616] z-50">
+                        <div className="space-y-1">
+                          {achievements.map((item, idx) => (
+                            <div key={idx} className="flex gap-3 rounded-lg p-2 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-900/50">
+                              <div className="mt-0.5 shrink-0 p-1">
+                                <Trophy size={12} className="text-yellow-500" />
+                              </div>
+                              <div className="flex-1 overflow-hidden">
+                                <p className="text-[10px] font-bold uppercase tracking-tight truncate">{item.title}</p>
+                                <p className="text-[9px] text-black/60 dark:text-white/60 leading-tight">{item.subtitle}</p>
+                                <p className="text-[8px] font-bold mt-1 text-black/40 dark:text-white/40">{item.year}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  {/* Pretty GF Link */}
+                  <div className="flex justify-center sm:justify-start">
+                    <a
+                      href="https://www.facebook.com/ledehbuuug"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-pink-500 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-pink-600 dark:border-neutral-800 dark:text-white dark:hover:bg-[#FFC0CB]"
+                    >
+                      <Heart size={12} strokeWidth={2} />
+                      Pretty GF
+                      <Heart size={12} strokeWidth={2} />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -279,22 +324,22 @@ export default function Home() {
                 <SectionTitle icon={<Monitor size={14} strokeWidth={1.8} />} title="About" />
                 <div className="space-y-3 text-sm leading-relaxed">
                   <p>
-                    Hello! I&apos;m Roberto Prisoris, a passionate{" "}
-                    <span className="font-bold border-b border-gray-200 dark:border-neutral-800">Web & Mobile Developer / Graphics Designer</span>{" "}
-                    dedicated to crafting seamless and efficient web applications. With a strong
-                    foundation in both front-end and back-end technologies.
+                    Hello! I&apos;m Roberto Prisoris, a versatile{" "}
+                    <span className="font-bold border-b border-gray-200 dark:border-neutral-800">Web & Mobile Developer and Graphics Designer</span>{" "}
+                    passionate about crafting seamless digital solutions. I specialize in building
+                    robust applications that merge high-performance code with high-impact visual
+                    design.
                   </p>
                   <p>
-                    I thrive on transforming ideas into functional and user-friendly digital
-                    experiences. My expertise lies in creating{" "}
-                    <span className="font-bold border-b border-gray-200 dark:border-neutral-800">responsive designs</span>,
-                    optimizing performance, and ensuring robust functionality across various
-                    platforms.
+                    From concept to deployment, I focus on creating{" "}
+                    <span className="font-bold border-b border-gray-200 dark:border-neutral-800">intuitive mobile apps, responsive web platforms</span>,
+                    and <span className="font-bold border-b border-gray-200 dark:border-neutral-800">engaging brand identities</span>. My approach
+                    combines technical precision with creative flair, ensuring every project is not only
+                    functional but also visually stunning.
                   </p>
                   <p>
-                    I am committed to staying updated with the latest industry trends and
-                    continuously honing my skills to deliver innovative solutions that meet client
-                    needs.
+                    I thrive on solving complex problems and am constantly evolving my tech stack to
+                    deliver modern, efficient, and user-centric experiences that exceed expectations.
                   </p>
                 </div>
               </Card>
