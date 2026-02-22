@@ -28,6 +28,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { ThemeAnimationType, useModeAnimation } from "react-theme-switch-animation";
+import { projects } from "@/lib/data";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -66,29 +67,7 @@ const certificates = [
   { title: "GTA Lab Mobile Certificate of Completion", issuer: "GTA Lab", year: "2024", image: "/GTA2024.png" },
 ];
 
-const projects = [
-  {
-    title: "ACETRACK",
-    status: "Done",
-    description: "Modern Student Attendance Tracking System",
-    tags: ["Next.js", "TypeScript", "Supabase", "Shadcn UI"],
-    link: "https://finalacetrack.vercel.app/",
-  },
-  {
-    title: "StayKo",
-    status: "In Progress",
-    description: "Discover your next home with integrated road-following navigation, real-time travel estimates, and direct owner contact—all in one place.",
-    tags: ["Next.js", "TypeScript", "Supabase", "Shadcn UI", "MapLibre", "OSRM"],
-    link: "https://stayko.vercel.app/",
-  },
-  {
-    title: "AquaNet",
-    status: "Done",
-    description: "A CAPSTONE PROJECT: Mobile App for Water Quality Monitoring and Management",
-    tags: ["Expo", "React Native", "Supabase", "Tailwind CSS"],
-  },
-
-];
+// Data moved to @/lib/data.ts
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -153,6 +132,67 @@ function Modal({ isOpen, onClose, image, title }: { isOpen: boolean; onClose: ()
   );
 }
 
+function GFSlideshowModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg"];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isOpen, images.length]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[300] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md animate-in fade-in duration-500"
+      onClick={onClose}
+    >
+      <div
+        className="relative max-w-xs w-full aspect-square overflow-hidden rounded-2xl bg-white dark:bg-[#111111] shadow-2xl animate-in zoom-in-95 duration-500 border border-white/10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 z-20 rounded-full bg-black/40 p-2 text-white hover:bg-black/60 backdrop-blur-md transition-all"
+        >
+          <X size={24} />
+        </button>
+        <div className="relative h-full w-full">
+          {images.map((img, idx) => (
+            <div
+              key={img}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${idx === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/gf/${img}`}
+                alt="Pretty GF"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-8">
+                <div className="flex gap-1.5 opacity-60">
+                  {images.map((_, dotIdx) => (
+                    <div
+                      key={dotIdx}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${dotIdx === currentIndex ? "w-6 bg-white" : "w-1.5 bg-white/40"
+                        }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
 export default function Home() {
@@ -163,6 +203,7 @@ export default function Home() {
   const [selectedCert, setSelectedCert] = useState<{ title: string; image: string } | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+  const [isGFModalOpen, setIsGFModalOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const galleryCarouselRef = useRef<HTMLDivElement>(null);
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
@@ -297,16 +338,14 @@ export default function Home() {
                   </div>
                   {/* Pretty GF Link */}
                   <div className="flex justify-center sm:justify-start">
-                    <a
-                      href="https://www.facebook.com/ledehbuuug"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-pink-500 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-pink-600 dark:border-neutral-800 dark:text-white dark:hover:bg-[#FFC0CB]"
+                    <button
+                      onClick={() => setIsGFModalOpen(true)}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-pink-500 px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-pink-600 dark:border-neutral-800 dark:text-white dark:hover:bg-[#FFC0CB] dark:hover:text-pink-600 shadow-sm active:scale-95"
                     >
-                      <Heart size={12} strokeWidth={2} />
+                      <Heart size={12} strokeWidth={2} className="animate-pulse" />
                       Pretty GF
-                      <Heart size={12} strokeWidth={2} />
-                    </a>
+                      <Heart size={12} strokeWidth={2} className="animate-pulse" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -366,27 +405,39 @@ export default function Home() {
                 <SectionTitle icon={<Lightbulb size={14} strokeWidth={1.8} />} title="Projects" />
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {projects.map((project) => (
-                    <div
-                      key={project.title}
-                      className="rounded-lg border border-gray-200 p-4 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900 cursor-default"
+                    <Link
+                      key={project.slug}
+                      href={`/projects/${project.slug}`}
+                      className="group block rounded-lg border border-gray-200 p-4 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900 transition-all hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden cursor-pointer z-10"
                     >
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-bold uppercase">{project.title}</span>
-                        {project.status && (
-                          <span className="rounded-sm border border-gray-200 px-1.5 py-0.5 text-[10px] font-bold dark:border-neutral-800">
-                            {project.status}
-                          </span>
-                        )}
+                      <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold uppercase">{project.title}</span>
+                          {project.status && (
+                            <span className="rounded-sm border border-gray-200 px-1.5 py-0.5 text-[10px] font-bold dark:border-neutral-800">
+                              {project.status}
+                            </span>
+                          )}
+                        </div>
+                        <ChevronRight
+                          size={14}
+                          className="text-black/20 dark:text-white/20 transition-all group-hover:text-black group-hover:translate-x-1 dark:group-hover:text-white"
+                        />
                       </div>
-                      <p className="text-xs leading-relaxed text-black/80 dark:text-neutral-400">{project.description}</p>
+                      <p className="text-xs leading-relaxed text-black/80 dark:text-neutral-400 line-clamp-2">{project.description}</p>
                       <div className="mt-2.5 flex flex-wrap gap-1">
-                        {project.tags.map((tag) => (
+                        {project.tags.slice(0, 3).map((tag) => (
                           <span key={tag} className="text-[10px] font-medium border border-gray-200 dark:border-neutral-800 px-1 rounded-sm">
                             {tag}
                           </span>
                         ))}
+                        {project.tags.length > 3 && (
+                          <span className="text-[10px] font-medium border border-gray-200 dark:border-neutral-800 px-1 rounded-sm">
+                            +{project.tags.length - 3}
+                          </span>
+                        )}
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </Card>
@@ -595,6 +646,11 @@ export default function Home() {
         onClose={() => setSelectedCert(null)}
         image={selectedCert?.image || ""}
         title={selectedCert?.title || ""}
+      />
+
+      <GFSlideshowModal
+        isOpen={isGFModalOpen}
+        onClose={() => setIsGFModalOpen(false)}
       />
     </div>
   );
