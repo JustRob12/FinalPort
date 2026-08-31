@@ -6,6 +6,7 @@ import { ThemeAnimationType, useModeAnimation } from "react-theme-switch-animati
 import { Sun, Moon } from "lucide-react";
 
 const graphicsImages = [
+    "/Graphics/SIGLAKAS 2025 OVERALL CHAMPION.jpg",
     "/Graphics/1.jpeg",
     "/Graphics/58th LOGO.png",
     "/Graphics/Buwan ng Wika.png",
@@ -67,7 +68,7 @@ export default function GraphicsPage() {
                                 />
                                 <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4">
                                     <p className="text-[10px] font-bold uppercase tracking-widest text-white">
-                                        {src.split('/').pop()?.replace('.png', '').replace('.jpeg', '')}
+                                        {src.split('/').pop()?.replace(/\.(png|jpeg|jpg|webp)$/i, '')}
                                     </p>
                                 </div>
                             </div>

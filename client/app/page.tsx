@@ -14,7 +14,6 @@ import {
   Lightbulb,
   Award,
   Eye,
-  BadgeCheck,
   Circle,
   X,
   ChevronLeft,
@@ -25,7 +24,6 @@ import {
   Share2,
   Heart,
   Trophy,
-  Sparkles,
 } from "lucide-react";
 import { ThemeAnimationType, useModeAnimation } from "react-theme-switch-animation";
 import { projects } from "@/lib/data";
@@ -208,6 +206,7 @@ export default function Home() {
   const galleryCarouselRef = useRef<HTMLDivElement>(null);
 
   const galleryImages = [
+    { num: 7, caption: "Graduation & Academic Honors", ext: "png" },
     { num: 1, caption: "Speaking & Presenting", ext: "jpg" },
     { num: 2, caption: "Event Highlights", ext: "jpg" },
     { num: 3, caption: "Organization Activities", ext: "jpg" },
@@ -255,13 +254,8 @@ export default function Home() {
           {/* ── REVISED FIRST CONTAINER: Modern Editorial Hero Profile Banner ── */}
           <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 sm:p-7 dark:border-neutral-800 dark:bg-[#111111] shadow-xs">
 
-            {/* Top Bar: Honor Distinction & Availability */}
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 dark:border-neutral-800/80 pb-3">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/80 bg-amber-50/90 px-3.5 py-1 text-xs font-bold text-amber-950 dark:border-amber-500/40 dark:bg-amber-950/40 dark:text-amber-300 shadow-2xs">
-                <Trophy size={13} className="text-amber-500 shrink-0 animate-bounce" />
-                <span>BSIT Graduate - Major in Mobile Development &bull; <strong className="uppercase">Cum Laude</strong></span>
-              </div>
-
+            {/* Top Bar: Availability & Location */}
+            <div className="mb-5 flex flex-wrap items-center justify-end gap-2 border-b border-gray-100 dark:border-neutral-800/80 pb-3">
               <div className="flex items-center gap-3 text-xs text-black/70 dark:text-white/70 font-medium">
                 <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
                   <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -276,12 +270,13 @@ export default function Home() {
             </div>
 
             {/* Main Hero Layout: Avatar, Name & Bio, Action Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
 
-              {/* Avatar (Left Column) */}
-              <div className="md:col-span-3 lg:col-span-3 flex justify-center md:justify-start">
+              {/* Left Group: Avatar + Name & Bio in a tight, cohesive layout */}
+              <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-5 sm:gap-6 text-center sm:text-left flex-1 min-w-0">
+                {/* Avatar */}
                 <div
-                  className="relative h-40 w-40 sm:h-44 sm:w-44 shrink-0 overflow-hidden rounded-2xl border-2 border-gray-200 dark:border-neutral-800 shadow-md group cursor-pointer"
+                  className="relative h-36 w-36 sm:h-40 sm:w-40 shrink-0 overflow-hidden rounded-2xl border-2 border-gray-200 dark:border-neutral-800 shadow-md group cursor-pointer"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
@@ -295,40 +290,41 @@ export default function Home() {
                     <span className="text-[10px] font-bold text-white uppercase tracking-wider">Roberto Prisoris</span>
                   </div>
                 </div>
-              </div>
 
-              {/* Name & Bio Highlights (Middle Column) */}
-              <div className="md:col-span-9 lg:col-span-6 text-center md:text-left space-y-2">
-                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-black/50 dark:text-white/50">
-                  <Sparkles size={12} className="text-amber-500" />
-                  <span>Full-Stack Developer & Graphics Designer</span>
-                </div>
+                {/* Name & Bio */}
+                <div className="space-y-2 min-w-0">
+                  <div className="flex items-center justify-center sm:justify-start gap-2">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-black dark:text-white">
+                      Roberto Prisoris
+                    </h1>
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-6 w-6 sm:h-7 sm:w-7 shrink-0 inline-block text-[#0866FF]"
+                      aria-label="Verified"
+                    >
+                      <path
+                        d="M10.29 2.308a2.4 2.4 0 0 1 3.42 0l.47.47a2.4 2.4 0 0 0 2.22.65l.65-.13a2.4 2.4 0 0 1 2.8 1.95l.13.65a2.4 2.4 0 0 0 1.55 1.77l.62.24a2.4 2.4 0 0 1 1.43 3.1l-.24.62a2.4 2.4 0 0 0 .47 2.29l.41.53a2.4 2.4 0 0 1-.36 3.39l-.53.41a2.4 2.4 0 0 0-.82 2.21l.13.65a2.4 2.4 0 0 1-2.02 2.75l-.65.13a2.4 2.4 0 0 0-1.89 1.4l-.27.61a2.4 2.4 0 0 1-3.13 1.25l-.61-.27a2.4 2.4 0 0 0-2.33 0l-.61.27a2.4 2.4 0 0 1-3.13-1.25l-.27-.61a2.4 2.4 0 0 0-1.89-1.4l-.65-.13a2.4 2.4 0 0 1-2.02-2.75l.13-.65a2.4 2.4 0 0 0-.82-2.21l-.53-.41a2.4 2.4 0 0 1-.36-3.39l.41-.53a2.4 2.4 0 0 0 .47-2.29l-.24-.62a2.4 2.4 0 0 1 1.43-3.1l.62-.24a2.4 2.4 0 0 0 1.55-1.77l.13-.65a2.4 2.4 0 0 1 2.8-1.95l.65.13a2.4 2.4 0 0 0 2.22-.65l.47-.47Z"
+                        fill="#0866FF"
+                      />
+                      <path
+                        d="M8.5 12.3l2.4 2.4 4.8-4.8"
+                        fill="none"
+                        stroke="#FFFFFF"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
 
-                <div className="flex items-center justify-center md:justify-start gap-2">
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-black dark:text-white">
-                    Roberto Prisoris
-                  </h1>
-                  <BadgeCheck size={26} strokeWidth={2} className="text-blue-500 shrink-0" />
-                </div>
-
-                <p className="text-xs sm:text-sm text-black/75 dark:text-neutral-300 leading-relaxed max-w-xl">
-                  Building modern web applications, mobile platforms, and visual brand identities. Dedicated to high-performance code and polished UI/UX design.
-                </p>
-
-                {/* Quick Honor Tags */}
-                <div className="pt-1 flex flex-wrap items-center justify-center md:justify-start gap-1.5">
-
-                  <span className="rounded-md border border-gray-200 bg-neutral-50 px-2.5 py-0.5 text-[10px] font-bold uppercase text-black/80 dark:border-neutral-800 dark:bg-neutral-900 dark:text-white/80">
-                    💻 Web & Mobile
-                  </span>
-                  <span className="rounded-md border border-gray-200 bg-neutral-50 px-2.5 py-0.5 text-[10px] font-bold uppercase text-black/80 dark:border-neutral-800 dark:bg-neutral-900 dark:text-white/80">
-                    🎨 Graphics Design
-                  </span>
+                  <p className="text-xs sm:text-sm text-black/75 dark:text-neutral-300 leading-relaxed max-w-xl">
+                    Building modern web applications, mobile platforms, and visual brand identities. Dedicated to high-performance code and polished UI/UX design.
+                  </p>
                 </div>
               </div>
 
               {/* Action Buttons (Right Column / Panel) */}
-              <div className="md:col-span-12 lg:col-span-3 flex flex-col sm:flex-row lg:flex-col gap-2.5 justify-center pt-2 lg:pt-0 border-t lg:border-t-0 lg:border-l border-gray-100 dark:border-neutral-800/80 lg:pl-6">
+              <div className="w-full lg:w-52 shrink-0 flex flex-col sm:flex-row lg:flex-col gap-2.5 justify-center pt-3 lg:pt-0 border-t lg:border-t-0 lg:border-l border-gray-100 dark:border-neutral-800/80 lg:pl-6">
                 <a
                   href="https://docs.google.com/document/d/1paps_by0DiSGQutX0el_28aZmsLQSx63/"
                   target="_blank"
@@ -464,10 +460,11 @@ export default function Home() {
 
                   <div
                     ref={carouselRef}
-                    className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide no-scrollbar snap-x h-36 sm:h-44"
+                    className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide no-scrollbar snap-x"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                   >
                     {[
+                      "/Graphics/SIGLAKAS 2025 OVERALL CHAMPION.jpg",
                       "/Graphics/58th LOGO.png",
                       "/Tshirts/17.png",
                       "/Tshirts/15.png",
@@ -478,7 +475,7 @@ export default function Home() {
                     ].map((src, i) => (
                       <div
                         key={i}
-                        className="flex-none w-44 sm:w-56 aspect-[16/10] rounded-xl overflow-hidden border border-gray-100 dark:border-neutral-900 bg-neutral-50 dark:bg-neutral-900/50 snap-start relative group/item"
+                        className="flex-none w-36 sm:w-44 aspect-square rounded-xl overflow-hidden border border-gray-100 dark:border-neutral-900 bg-neutral-50 dark:bg-neutral-900/50 snap-start relative group/item"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -681,7 +678,7 @@ export default function Home() {
                 {galleryImages.map((img) => (
                   <div
                     key={img.num}
-                    className="flex-none w-64 sm:w-80 md:w-96 aspect-[16/10] rounded-xl overflow-hidden border border-gray-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 snap-start relative group/card"
+                    className="flex-none w-52 sm:w-64 md:w-72 aspect-square rounded-xl overflow-hidden border border-gray-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 snap-start relative group/card shadow-2xs"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img

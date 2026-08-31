@@ -6,6 +6,7 @@ import { ThemeAnimationType, useModeAnimation } from "react-theme-switch-animati
 import { Sun, Moon } from "lucide-react";
 
 const galleryImages = [
+    "/Gallery/7.png",
     "/Gallery/1.jpg",
     "/Gallery/2.jpg",
     "/Gallery/3.jpg",

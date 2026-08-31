@@ -21,7 +21,7 @@ export const projects: Project[] = [
         status: "Done",
         description: "Modern Student Attendance Tracking System",
         tags: ["Next.js", "TypeScript", "Supabase", "Shadcn UI"],
-        link: "https://finalacetrack.vercel.app/",
+        link: "https://aces-acetrack.vercel.app/",
         image: "/Graphics/acetrack_detail.png", // Placeholder based on image
         overview: "ACETRACK is a comprehensive attendance management system designed for school organizations. It streamlines the tracking process with QR code precision and real-time data management.",
         challenge: "Developing a reliable and fast QR code scanning mechanism that works across various mobile devices while ensuring data integrity in a high-concurrency environment during peak attendance hours.",
