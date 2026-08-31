@@ -38,6 +38,7 @@ const techStack = {
 };
 
 const experiences = [
+  { title: "Web Developer / Video Editor & Graphic Designer", company: "Direct Response Marketing", period: "Present" },
   { title: "BS Information Technology (Cum Laude)", company: "Davao Oriental State University", period: "2026", highlight: true },
   { title: "Web Development Intern", company: "DICT - DOrSU", period: "2026" },
   { title: "Full Stack Web Developer", company: "ACES - DOrSU", period: "2023 – Present" },
