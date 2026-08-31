@@ -686,9 +686,6 @@ export default function Home() {
                       alt={`Gallery photo ${img.num}`}
                       className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-end p-3.5">
-                      <p className="text-xs font-semibold text-white tracking-wide">{img.caption}</p>
-                    </div>
                   </div>
                 ))}
               </div>

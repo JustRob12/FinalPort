@@ -60,11 +60,6 @@ export default function GalleryPage() {
                                     alt={`Gallery Image ${i + 1}`}
                                     className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-4">
-                                    <p className="text-[10px] font-bold uppercase tracking-widest text-white">
-                                        Image {i + 1}
-                                    </p>
-                                </div>
                             </div>
                         ))}
                     </div>
