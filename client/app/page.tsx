@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { ThemeAnimationType, useModeAnimation } from "react-theme-switch-animation";
 import { projects } from "@/lib/data";
+import GithubContributions from "@/components/GithubContributions";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -284,11 +285,11 @@ export default function Home() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={getProfileImage()}
-                    alt="Roberto Prisoris"
+                    alt="Roberto Jr M. Prisoris"
                     className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-2">
-                    <span className="text-[10px] font-bold text-white uppercase tracking-wider">Roberto Prisoris</span>
+                    <span className="text-[10px] font-bold text-white uppercase tracking-wider">Roberto Jr M. Prisoris</span>
                   </div>
                 </div>
 
@@ -296,7 +297,7 @@ export default function Home() {
                 <div className="space-y-2 min-w-0">
                   <div className="flex items-center justify-center sm:justify-start gap-2">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-black dark:text-white">
-                      Roberto Prisoris
+                      Roberto Jr M. Prisoris
                     </h1>
                     <svg
                       viewBox="0 0 24 24"
@@ -369,7 +370,7 @@ export default function Home() {
                 <SectionTitle icon={<Monitor size={15} strokeWidth={1.8} />} title="About Me" />
                 <div className="space-y-3 text-sm leading-relaxed text-black/85 dark:text-neutral-300">
                   <p>
-                    Hello! I&apos;m Roberto Prisoris, a{" "}
+                    Hello! I&apos;m Roberto Jr M. Prisoris, a{" "}
                     <span className="font-bold text-black dark:text-white border-b-2 border-amber-400 dark:border-amber-500/70 px-0.5">
                       BSIT Graduate (Cum Laude)
                     </span>{" "}
@@ -590,6 +591,9 @@ export default function Home() {
 
             </div>
           </div>
+
+          {/* ── GitHub Contributions (Black and White Theme) ── */}
+          <GithubContributions />
 
           {/* ── Side-by-Side Section: Tech Stack (Left) and Social Links (Right) ── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
